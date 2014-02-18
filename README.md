@@ -41,7 +41,7 @@ Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and
  [ww,bias,stat]=dallrds(zeros(n), 0, A, yy, lambda);
 ```
 
-### Matrix completion
+### Noisy matrix completion
 ```matlab
  n = [64 64]; r = round(0.1*n(1)); m = 2*r*sum(n);
  w0=randsparse(n,'rank',r);
