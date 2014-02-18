@@ -21,7 +21,7 @@ else
 end
 
 
-[vsth,ss] = l1_softth(vv,eta(1)*lambda);
+[vsth,ss] = prob.softth(vv,eta(1)*lambda);
 info.wnew = vsth;
 info.spec = ss;
 
