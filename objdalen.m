@@ -60,7 +60,7 @@ else
     I = find(ss>0);
     len = length(I);
     AF = A.slice(I);
-    eta_en = eta(1)/(1+eta*lambda*(1-theta));
+    eta_en = eta(1)/(1+eta(1)*lambda*(1-theta));
     switch(info.solver)
      case 'cg'
       prec=hloss+spdiag(eta_en*sum(AF.^2,2));
