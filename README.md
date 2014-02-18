@@ -43,13 +43,13 @@ Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and
 
 ### Noisy matrix completion
 ```matlab
- n = [64 64]; r = round(0.1*n(1)); m = 2*r*sum(n);
+ n = [640 640]; r = 6; m = 2*r*sum(n);
  w0=randsparse(n,'rank',r);
  ind=randperm(prod(n)); ind=ind(1:m);
  A=sparse(1:m, ind, ones(1,m), m, prod(n));
  yy=A*w0(:)+0.01*randn(m,1);
- lambda=0.1*norm(reshape(A'*yy,n));
- [ww,stat]=dalsqds(zeros(n),A,yy,lambda);
+ lambda=0.3*norm(reshape(A'*yy,n));
+ [ww,stat]=dalsqds(zeros(n),A,yy,lambda,'solver','qn');
 ```
 
 ### LASSO with individual weights
