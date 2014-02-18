@@ -84,3 +84,22 @@ Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and
 ### Sparsely-connected multivariate AR model
 
 See `s_test_hsgl.m`
+
+## References
+
+ * Ryota Tomioka, Taiji Suzuki, and Masashi Sugiyama (2011) [Augmented Lagrangian Methods for Learning, Selecting, and Combining Features.](http://ttic.uchicago.edu/~ryotat/opt_book.pdf) In Suvrit Sra, Sebastian Nowozin, and Stephen J. Wright, editors, Optimization for Machine Learning. MIT Press.
+ * Ryota Tomioka, Taiji Suzuki, Masashi Sugiyama, and Hisashi Kashima (2010)[A Fast Augmented Lagrangian Algorithm for Learning Low-Rank Matrices.](http://www.ibis.t.u-tokyo.ac.jp/ryotat/icml2010.pdf) In Proc. of the 27 th Annual International Conference on Machine Learning (ICML 2010), Haifa, Israel. [[Slides]](http://www.ibis.t.u-tokyo.ac.jp/ryotat/icml10talk.pdf) [[Support page]](http://www.ibis.t.u-tokyo.ac.jp/RyotaTomioka/Softwares/SupportPageICML10)
+ * Ryota Tomioka, Taiji Suzuki, and Masashi Sugiyama (2011) [Super-Linear Convergence of Dual Augmented Lagrangian Algorithm for Sparse Learning.](http://jmlr.org/papers/volume12/tomioka11a/tomioka11a.pdf) JMLR 12: 1537-1586. [[Support Page]](http://www.ibis.t.u-tokyo.ac.jp/RyotaTomioka/Softwares/SupportPageOpt09)
+ * Ryota Tomioka &amp; Masashi Sugiyama (2009) [Dual Augmented Lagrangian Method for Efficient Sparse Reconstruction](http://ieeexplore.ieee.org/search/wrapper.jsp?arnumber=5204163/) IEEE Signal Proccesing Letters, 16 (12) pp. 1067-1070.
+
+## Papers that use DAL
+
+ * Makoto Yamada, Wittawat Jitkrittum, Leonid Sigal, and Masashi Sugiyama (2012) [High-Dimensional Feature Selection by Feature-Wise Non-Linear Lasso.](http://arxiv.org/abs/1202.0515) arXiv:1202.0515v1
+ * Kriti Puniyani, Seyoung Kim and Eric P. Xing (2010) [Multi-population GWA mapping via multi-task regularized regression.](http://bioinformatics.oxfordjournals.org/content/26/12/i208) Bioinformatics, 26 (12): pp. i208-i216.
+ *  S. Haufe, R. Tomioka, T. Dickhaus, C. Sannelli, B. Blankertz, G. Nolte, K.-R. Müller (2010) [Large-scale EEG/MEG source localization with spatial flexibility.](http://www.ncbi.nlm.nih.gov/pubmed/20832477) Neuroimage.
+ *  Stefan Haufe, Ryota Tomioka, Guido Nolte, Klaus-Robert Müller, and Motoaki Kawanabe (2010) [Modeling sparse connectivity between underlying brain sources for EEG/MEG.](http://www.ncbi.nlm.nih.gov/pubmed/20483681) IEEE Trans. Biomed. Eng. 57(8), pp. 1954-1963.
+
+
+## Acknowledgments
+
+I would like to thank Stefan Haufe, Christian Kothe, Marius Kloft, Artemy Kolchinsky, and Makoto Yamada for testing the software and pointing out some problems. The non-negative lasso extension was contributed by Shigeyuki Oba. The weighted lasso was contributed by Satoshi Hara. I was supported by the Global COE program (Computationism as a Foundation for the Sciences) until March 2009.
