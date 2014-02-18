@@ -1,6 +1,6 @@
 # DAL
 
-Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and learning. For more details, check out our [JMLR paper](http://jmlr.csail.mit.edu/papers/v12/tomioka11a.html), my [talk](http://videolectures.net/nipsworkshops09_tomioka_slc/), and [slides](http://ttic.uchicago.edu/~ryotat/talks/opt09talk.pdf).
+Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and learning. For more details, check out our [JMLR paper](http://jmlr.csail.mit.edu/papers/v12/tomioka11a.html), [book chapter](http://ttic.uchicago.edu/~ryotat/opt_book.pdf), [talk](http://videolectures.net/nipsworkshops09_tomioka_slc/), and [slides](http://ttic.uchicago.edu/~ryotat/talks/opt09talk.pdf).
 
 
 ## Examples
