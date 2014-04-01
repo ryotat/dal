@@ -82,8 +82,17 @@ Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and
 ```
 
 ### Sparsely-connected multivariate AR model
+Try
+```matlab
+ s_test_hsgl
+```
+To get
 
-See `s_test_hsgl.m`
+![Estimation of sparsely-connected MVAR coefficients](./mvar.png)
+
+Here the model is a sparsely connected 3rd order multi-variate AR model with 20 variables. The top row shows the true coefficients. The bottom row shows the estimated coefficients.
+
+See [s_test_hsgl.m](./matlab/s_test_hsgl.m)
 
 ## References
 
