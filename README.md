@@ -97,8 +97,8 @@ See [s_test_hsgl.m](./matlab/s_test_hsgl.m) and our [paper](http://www.ncbi.nlm.
 ## References
 
  * Ryota Tomioka, Taiji Suzuki, and Masashi Sugiyama (2011) [Augmented Lagrangian Methods for Learning, Selecting, and Combining Features.](http://ttic.uchicago.edu/~ryotat/opt_book.pdf) In Suvrit Sra, Sebastian Nowozin, and Stephen J. Wright, editors, Optimization for Machine Learning. MIT Press.
- * Ryota Tomioka, Taiji Suzuki, Masashi Sugiyama, and Hisashi Kashima (2010)[A Fast Augmented Lagrangian Algorithm for Learning Low-Rank Matrices.](http://www.ibis.t.u-tokyo.ac.jp/ryotat/icml2010.pdf) In Proc. of the 27 th Annual International Conference on Machine Learning (ICML 2010), Haifa, Israel. [[Slides]](http://www.ibis.t.u-tokyo.ac.jp/ryotat/icml10talk.pdf) [[Support page]](http://www.ibis.t.u-tokyo.ac.jp/RyotaTomioka/Softwares/SupportPageICML10)
- * Ryota Tomioka, Taiji Suzuki, and Masashi Sugiyama (2011) [Super-Linear Convergence of Dual Augmented Lagrangian Algorithm for Sparse Learning.](http://jmlr.org/papers/volume12/tomioka11a/tomioka11a.pdf) JMLR 12: 1537-1586. [[Support Page]](http://www.ibis.t.u-tokyo.ac.jp/RyotaTomioka/Softwares/SupportPageOpt09)
+ * Ryota Tomioka, Taiji Suzuki, Masashi Sugiyama, and Hisashi Kashima (2010)[A Fast Augmented Lagrangian Algorithm for Learning Low-Rank Matrices.](http://ttic.uchicago.edu/~ryotat/papers/icml2010.pdf) In Proc. of the 27 th Annual International Conference on Machine Learning (ICML 2010), Haifa, Israel. [[Slides]](http://ttic.uchicago.edu/~ryotat/talks/icml10talk.pdf) [[Support page]](https://github.com/ryotat/ICML10)
+ * Ryota Tomioka, Taiji Suzuki, and Masashi Sugiyama (2011) [Super-Linear Convergence of Dual Augmented Lagrangian Algorithm for Sparse Learning.](http://jmlr.org/papers/volume12/tomioka11a/tomioka11a.pdf) JMLR 12: 1537-1586. [[Support Page]](https://github.com/ryotat/Opt09)
  * Ryota Tomioka &amp; Masashi Sugiyama (2009) [Dual Augmented Lagrangian Method for Efficient Sparse Reconstruction](http://ieeexplore.ieee.org/search/wrapper.jsp?arnumber=5204163/) IEEE Signal Proccesing Letters, 16 (12) pp. 1067-1070.
 
 ## Papers that use DAL
