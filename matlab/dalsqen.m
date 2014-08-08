@@ -38,7 +38,7 @@
 function [ww,status]=dalsqen(ww, A, bb, lambda, theta, varargin)
 
 opt=propertylist2struct(varargin{:});
-opt=set_defaults(opt,'solver','nt',...
+opt=set_defaults(opt,'solver','cg',...
                      'stopcond','pdg');
 
 
@@ -56,7 +56,7 @@ prob.bc       =[];
 prob.info     =struct('theta',theta);
 
 if isequal(opt.solver,'cg')
-  prob.hessMult = @hessMultdalen;
+  prob.hessMult = @hessMultdall1;
 end
 
 if isequal(opt.stopcond,'fval')

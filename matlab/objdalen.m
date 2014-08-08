@@ -28,7 +28,7 @@ end
 info.wnew = vsth;
 info.spec = ss;
 
-fval = floss+0.5*(1+eta*lambda*(1-theta))*sum(vsth.^2)/eta(1);
+fval = floss+0.5*(1+eta(1)*lambda*(1-theta))*sum(vsth.^2)/eta(1);
 if ~isempty(uu)
   u1   = uu+eta(2)*(B'*aa);
   fval = fval + 0.5*sum(u1.^2)/eta(2);
@@ -60,17 +60,16 @@ else
     I = find(ss>0);
     len = length(I);
     AF = A.slice(I);
-    eta_en = eta(1)/(1+eta(1)*lambda*(1-theta));
     switch(info.solver)
      case 'cg'
-      prec=hloss+spdiag(eta_en*sum(AF.^2,2));
+      prec=hloss+spdiag(eta(1)*sum(AF.^2,2));
       if ~isempty(uu)
         prec =prec+spdiag(eta(2)*sum(B.^2,2));
       end
       varargout{3} = struct('hloss',hloss,'AF',AF,'I',I,'n',n,'prec',prec,'B',B);
      otherwise
       if length(I)>0
-        varargout{3} = hloss+eta_en*AF*AF';
+        varargout{3} = hloss+eta(1)*AF*AF';
       else
         varargout{3} = hloss;
       end
