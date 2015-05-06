@@ -11,7 +11,10 @@ m = length(aa);
 if isempty(info.ATaa)
   info.ATaa=A.Ttimes(aa);
 end
-vv = ww/eta(1)+info.ATaa;
+vv=struct('U',ww.U,...
+          'ss',ww.ss/eta,...
+          'V',ww.V,...
+          'D',info.ATaa); % ww/eta+AT(aa);
 
 if nargout<=3
   [floss, gloss, hmin]=prob.floss.d(aa, prob.floss.args{:});
@@ -45,7 +48,16 @@ if nargout<=2
   varargout{2} = info;
 else
   gg  = gloss+eta(1)*(A.times(vsth));
-  soc = sum((vsth-ww/eta(1)).^2);
+
+  dw=struct('U',[vsth.U, ww.U],...
+            'ss',[vsth.ss; -ww.ss/eta],...
+            'V',[vsth.V, ww.V],...
+            'D',[]);
+
+    R=size(dw.U,1);
+  C=size(dw.V,1);
+  K= min([R,C, size(dw.U,2)]);
+  soc =sum(lansvd(@(x)multlr(x,dw),@(y)multlrt(y,dw),R,C,10).^2); 
   if ~isempty(uu)
     gg  = gg+eta(2)*B*u1;
     soc = soc+sum((B'*aa).^2);

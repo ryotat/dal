@@ -4,6 +4,7 @@ nn=sum(min(blks,[],2));
 
 nm=zeros(nn,1);
 
+if isnumeric(ww)
 ix0=0;
 ixw=0;
 for kk=1:size(blks,1)
@@ -13,4 +14,7 @@ for kk=1:size(blks,1)
   J=ix0+(1:min(blk));
   ix0=J(end);
   nm(J)=svd(reshape(ww(I),blk));
+end
+else
+  nm=ww.ss;
 end
