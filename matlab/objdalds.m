@@ -31,7 +31,7 @@ end
 
 [vsth, ss, info] = prob.softth(vv,lambda,info);
 
-info.wnew=vsth*eta(1);
+info.wnew=vsth; info.wnew.ss=vsth.ss*eta;
 info.spec=ss;
 
 fval = floss+0.5*eta(1)*sum(ss.^2);
@@ -49,15 +49,10 @@ if nargout<=2
 else
   gg  = gloss+eta(1)*(A.times(vsth));
 
-  dw=struct('U',[vsth.U, ww.U],...
-            'ss',[vsth.ss; -ww.ss/eta],...
-            'V',[vsth.V, ww.V],...
-            'D',[]);
-
-    R=size(dw.U,1);
-  C=size(dw.V,1);
-  K= min([R,C, size(dw.U,2)]);
-  soc =sum(lansvd(@(x)multlr(x,dw),@(y)multlrt(y,dw),R,C,10).^2); 
+  [~,R1]=qr([vsth.U, ww.U]);
+  [~,R2]=qr([vsth.V, ww.V]);
+  
+  soc=norm(R1*diag([vsth.ss; -ww.ss/eta])*R2','fro')^2;
   if ~isempty(uu)
     gg  = gg+eta(2)*B*u1;
     soc = soc+sum((B'*aa).^2);

@@ -23,7 +23,7 @@ else
     if isnumeric(A)
       [U,S,V]=pca(A, kk, 10); % Using Mark Tygert's pca.m
     else
-      [U,S,V]=lansvd(A{:},kk,'L',struct('s_target',lambda));
+      [U,S,V]=pca(A, kk, 10);
     end
     mm=min(diag(S));
   end

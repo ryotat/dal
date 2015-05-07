@@ -1,4 +1,4 @@
-function [U,S,V] = pca(A,k,its,l)
+function varargout = pca(A,k,its,l)
 %PCA  Low-rank approximation in SVD form.
 %
 %
@@ -115,7 +115,7 @@ end
 %
 % Check the number of outputs.
 %
-if(nargout ~= 3)
+if(nargout~=1 && nargout ~= 3)
   error('MATLAB:pca:WrongNumOut',...
         'There must be exactly 3 outputs.')
 end
@@ -141,7 +141,7 @@ end
 %
 % Check the first input argument.
 %
-if(~isfloat(A))
+if(~isfloat(A) && ~iscell(A))
   error('MATLAB:pca:In1NotFloat',...
         'Input 1 must be a floating-point matrix.')
 end
@@ -154,7 +154,14 @@ end
 %
 % Retrieve the dimensions of A.
 %
-[m n] = size(A);
+if isnumeric(A)
+  [m, n] = size(A);
+else
+  AT=A{2};
+  m=A{3};
+  n=A{4};
+  A=A{1};
+end
 
 %
 % Check the remaining input arguments.
@@ -199,33 +206,38 @@ end
 %
 if(((its+1)*l >= m/1.25) || ((its+1)*l >= n/1.25))
 
+  if isnumeric(A)
   if(~issparse(A))
-    [U,S,V] = svd(A,'econ');
+    if nargout>1
+      [U,S,V] = svd(A,'econ');
+    else
+      S =  svd(A,'econ');
+    end
   end
 
   if(issparse(A))
-    [U,S,V] = svd(full(A),'econ');
+    if nargout>1
+      [U,S,V] = svd(full(A),'econ');
+    else
+      S = svd(full(A),'econ');
+    end
   end
-%
-% Retain only the leftmost k columns of U, the leftmost k columns of V,
-% and the uppermost leftmost k x k block of S.
-%
-  U = U(:,1:k);
-  V = V(:,1:k);
-  S = S(1:k,1:k);
+  else
+    if nargout>1
+      [U,S,V]=svd(A(eye(n)),'econ');
+    else
+      S = svd(A(eye(n)),'econ');
+    end
+  end
 
-  return
-
-end
-
-
-if(m >= n)
+elseif(m >= n)
 
 %
 % Apply A to a random matrix, obtaining H.
 %
   rand('seed',rand('seed'));
 
+  if isnumeric(A)
   if(isreal(A))
     H = A*(2*rand(n,l)-ones(n,l));
   end
@@ -233,6 +245,10 @@ if(m >= n)
   if(~isreal(A))
     H = A*( (2*rand(n,l)-ones(n,l)) + i*(2*rand(n,l)-ones(n,l)) );
   end
+  else
+    H = A(2*rand(n,l)-ones(n,l));
+  end
+  
 
   rand('twister',rand('twister'));
 
@@ -247,8 +263,12 @@ if(m >= n)
 % augmenting F with the new H each time.
 %
   for it = 1:its
-    H = (H'*A)';
-    H = A*H;
+    if isnumeric(A)
+      H = (H'*A)';
+      H = A*H;
+    else
+      H = A(AT(H));
+    end
     F(1:m, (1+it*l):((it+1)*l)) = H;
   end
 
@@ -267,29 +287,33 @@ if(m >= n)
 % and right singular vectors of A; adjust the left singular vectors
 % of Q'*A to approximate the left singular vectors of A.
 %
-  [U2,S,V] = svd(Q'*A,'econ');
-  U = Q*U2;
+  if isnumeric(A)
+    if nargout>1
+      [U2,S,V] = svd(Q'*A,'econ');
+    else
+      S = svd(Q'*A,'econ');
+    end
+  else
+    if nargout>1
+      [V,S,U2] = svd(AT(Q),'econ');
+    else
+      S = svd(AT(Q),'econ');
+    end
+  end
+  if nargout>1
+    U = Q*U2;
+  end
 
   clear Q U2;
 
-%
-% Retain only the leftmost k columns of U, the leftmost k columns of V,
-% and the uppermost leftmost k x k block of S.
-%
-  U = U(:,1:k);
-  V = V(:,1:k);
-  S = S(1:k,1:k);
-
-end
-
-
-if(m < n)
+elseif(m < n)
 
 %
 % Apply A' to a random matrix, obtaining H.
 %
   rand('seed',rand('seed'));
 
+  if isnumeric(A)
   if(isreal(A))
     H = ((2*rand(l,m)-ones(l,m))*A)';
   end
@@ -297,7 +321,10 @@ if(m < n)
   if(~isreal(A))
     H = (( (2*rand(l,m)-ones(l,m)) + i*(2*rand(l,m)-ones(l,m)) )*A)';
   end
-
+  else % assume A is real
+    H = AT(2*rand(m,l)-ones(m,l));
+  end
+  
   rand('twister',rand('twister'));
 
 %
@@ -311,8 +338,12 @@ if(m < n)
 % augmenting F with the new H each time.
 %
   for it = 1:its
+    if isnumeric(A)
     H = A*H;
     H = (H'*A)';
+    else
+      H=AT(A(H));
+    end
     F(1:n, (1+it*l):((it+1)*l)) = H;
   end
 
@@ -331,17 +362,36 @@ if(m < n)
 % and left singular vectors of A; adjust the right singular vectors
 % of A*Q to approximate the right singular vectors of A.
 %
-  [U,S,V2] = svd(A*Q,'econ');
-  V = Q*V2;
+  if isnumeric(A)
+    if nargout>1
+      [U,S,V2] = svd(A*Q,'econ');
+    else
+      S = svd(A*Q,'econ');
+    end
+  else
+    if nargout>1
+      [V2,S,U] = svd(A(Q),'econ');
+    else
+      S = svd(A(Q),'econ');
+    end
+  end
+  if nargout>1
+    V = Q*V2;
+  end
 
   clear Q V2;
 
+
+end
 %
 % Retain only the leftmost k columns of U, the leftmost k columns of V,
 % and the uppermost leftmost k x k block of S.
 %
-  U = U(:,1:k);
-  V = V(:,1:k);
-  S = S(1:k,1:k);
 
+if nargout>1
+  varargout{1} = U(:,1:k);
+  varargout{2} = S(1:k,1:k);
+  varargout{3} = V(:,1:k);
+else
+  varargout{1} = S(1:k);
 end

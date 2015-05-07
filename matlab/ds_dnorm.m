@@ -12,9 +12,9 @@ for kk=1:size(blks,1)
   blk=blks(kk,:);
   I=ix0+(1:blk(1)*blk(2));
   ix0=I(end);
-  nm=max(nm,lansvd(reshape(ww(I),blk),1));
+  nm=max(nm,pca(reshape(ww(I),blk),1,10));
 end
 else
-  nm=lansvd(ww,1);
+  nm=pca(ww,1,10);
 end
 ishard=1;

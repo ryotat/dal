@@ -45,8 +45,12 @@ opt=set_defaults(opt,'solver','cg',...
 
 
 if isempty(opt.blks)
-  opt.blks=size(ww);
-  ww = ww(:);
+  [R,C]=size(ww);
+  opt.blks=[R,C];
+  ww=struct('U',zeros(R,10),...
+          'ss',zeros(10,1),...
+          'V',zeros(C,10),...
+          'D', []);
 end
 
 prob.floss    = struct('p',@loss_sqp,'d',@loss_sqd,'args',{{yy}});
@@ -76,7 +80,7 @@ if isnumeric(A)
 elseif iscell(A)
   mm = A{3};
   nn = A{4};
-  fAslice = @(I)fA(sparse(I,1:length(I),ones(length(I),1), nn, length(I)));
+  fAslice = @(I)A{1}(sparse(I,1:length(I),ones(length(I),1), nn, length(I)));
   fA = struct('times',A{1},...
               'Ttimes',A{2},...
               'slice',fAslice);
@@ -89,8 +93,5 @@ prob.nn       = nn;
 
 [ww,uu,status]=dal(prob,ww,[],fA,[],lambda,opt);
 
-if size(opt.blks,1)==1
-  ww=reshape(ww,opt.blks);
-end
 
 

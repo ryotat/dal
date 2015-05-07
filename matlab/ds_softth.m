@@ -36,11 +36,12 @@ for kk=1:size(info.blks,1)
   info.V{kk}=V;
 end
 else
+  R=info.blks(1); C=info.blks(2);
   if strcmp(info.solver,'cg') || info.nsv==min(info.blks)
     [U,S,V]=svd(vv.U*diag(vv.ss)*vv.V'+vv.D);
   else
     vcell={@(x)multlr(x,vv),@(x)multlrt(x,vv),R,C};
-    [U,S,V]=svdmaj(vcell(:), lambda, 'kinit', info.nsv+1));
+    [U,S,V]=svdmaj(vcell, lambda, 'kinit', info.nsv+1);
   end
   dd=diag(S);
   K=find(dd>lambda);
