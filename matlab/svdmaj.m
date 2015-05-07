@@ -14,12 +14,12 @@ else
 
   mm = inf;
 
-  fprintf('[svdmaj]\n');
+  % fprintf('[svdmaj]\n');
 
   kk=opt.kinit/opt.kstep;
   while mm>lambda && kk<MM
     kk=min(kk*opt.kstep, MM);
-    fprintf('kk=%d\n',kk);
+    % fprintf('kk=%d\n',kk);
     if isnumeric(A)
       [U,S,V]=pca(A, kk, 10); % Using Mark Tygert's pca.m
     else
