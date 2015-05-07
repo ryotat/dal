@@ -1,4 +1,4 @@
-% s_test_hsgl - a sample program for sparse connectivity inference.
+% exp_hsgl - a sample program for sparse connectivity inference.
 %
 % This program infers a sparsely connected multivariate AR
 % model assuming that the sources are independent and super

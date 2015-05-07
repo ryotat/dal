@@ -34,7 +34,7 @@
 %  status : various status values
 %
 % Example:
-%  See s_test_hsgl.m.
+%  'See'; s_test_hsgl
 %
 % Copyright(c) 2009-2011 Ryota Tomioka
 %              2009      Stefan Haufe
@@ -87,7 +87,7 @@ if isnumeric(A)
 elseif iscell(A)
   mm = A{3};
   nn = A{4};
-  fAslice = @(I)fA(sparse(I,1:length(I),ones(length(I),1), nn, length(I)));
+  fAslice = @(I)A{1}(sparse(I,1:length(I),ones(length(I),1), nn, length(I)));
   fA = struct('times',A{1},...
               'Ttimes',A{2},...
               'slice',fAslice);
