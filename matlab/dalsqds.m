@@ -1,5 +1,8 @@
 % dalsqds - DAL with squared loss and the dual spectral norm
 %           (trace norm) regularization
+%           This implementation only keeps the factors of the
+%           solution and never forms the full matrix. This only
+%           works for the quasi-Newton solver.
 %
 % Overview:
 %  Solves the optimization problem:
@@ -28,10 +31,15 @@
 %  status : various status values
 %
 % Example:
-% m = 2048; n = [64 64]; r = round(0.1*n(1)); A=randn(m,prod(n));
-% w0=randsparse(n,'rank',r); yy=A*w0(:)+0.01*randn(m,1);
-% lambda=0.1*norm(reshape(A'*yy,n));
-% [ww,stat]=dalsqds(zeros(n),A, yy, lambda);
+% n = [640 640]; r = 6; m = 10*r*sum(n);
+% w0=randsparse(n,'rank',r);
+% ind=randperm(prod(n)); ind=ind(1:m)';
+% [I,J]=ind2sub(n, ind);
+% yy=w0(ind)+0.01*randn(m,1);
+% A={@(X)fobsX(X,I,J), @(aa)fobsXadj(aa,I,J,n(1),n(2)), m, prod(n)};
+% lambda=0.1*norm(full(A{2}(yy)));
+% [ww,stat]=dalsqds(zeros(n),A,yy,lambda,'solver','qn','eta',1);
+% W=ww.U*diag(ww.ss)*ww.V';
 %
 % Copyright(c) 2009 Ryota Tomioka
 % This software is distributed under the MIT license. See license.txt
@@ -39,10 +47,14 @@
 function [ww,status]=dalsqds(ww, A, yy, lambda, varargin)
 
 opt=propertylist2struct(varargin{:});
-opt=set_defaults(opt,'solver','cg',...
+opt=set_defaults(opt,'solver','qn',...
                      'stopcond','pdg',...
                      'blks',[]);
 
+if ~strcmp(opt.solver, 'qn')
+  error(['This version only works with solver=qn. Check out the ' ...
+         'master branch to use cg.']);
+end
 
 if isempty(opt.blks)
   [R,C]=size(ww);
