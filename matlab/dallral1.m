@@ -27,7 +27,7 @@
 % m = 1024; n = 4096; k = round(0.04*n); A=randn(m,n);
 % w0=randsparse(n,k); yy=sign(A*w0+0.01*randn(m,1));
 % pp=0.1*abs(A'*bb);
-% [ww,bias,stat]=dallrl1(zeros(n,1), 0, A, yy, pp);
+% [ww,bias,stat]=dallral1(zeros(n,1), 0, A, yy, pp);
 %
 % Copyright(c) 2009- Ryota Tomioka, Satoshi Hara
 % This software is distributed under the MIT license. See license.txt
@@ -89,7 +89,7 @@ if isnumeric(A)
 elseif iscell(A)
   mm = A{3};
   nn = A{4};
-  fAslice = @(I)fA(sparse(I,1:length(I),ones(length(I),1), nn, length(I)));
+  fAslice = @(I)A{1}(sparse(I,1:length(I),ones(length(I),1), nn, length(I)));
   fA = struct('times',A{1},...
               'Ttimes',A{2},...
               'slice',fAslice);
