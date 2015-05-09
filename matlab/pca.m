@@ -370,7 +370,7 @@ elseif(m < n)
     end
   else
     if nargout>1
-      [V2,S,U] = svd(A(Q),'econ');
+      [U,S,V2] = svd(A(Q),'econ');
     else
       S = svd(A(Q),'econ');
     end
