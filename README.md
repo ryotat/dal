@@ -84,7 +84,7 @@ Dual Augmented Lagrangian (DAL) algorithm for sparse/low-rank reconstruction and
 ### Sparsely-connected multivariate AR model
 Try
 ```matlab
- s_test_hsgl
+ exp_hsgl
 ```
 To get
 
