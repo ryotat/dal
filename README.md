@@ -92,7 +92,7 @@ To get
 
 Here the model is a sparsely connected 3rd order multi-variate AR model with 20 variables. The top row shows the true coefficients. The bottom row shows the estimated coefficients.
 
-See [s_test_hsgl.m](./matlab/s_test_hsgl.m) and our [paper](http://www.ncbi.nlm.nih.gov/pubmed/20483681) for more details.
+See [exp_hsgl.m](./matlab/exp_hsgl.m) and our [paper](http://www.ncbi.nlm.nih.gov/pubmed/20483681) for more details.
 
 ## References
 
