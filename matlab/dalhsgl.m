@@ -34,7 +34,7 @@
 %  status : various status values
 %
 % Example:
-%  'See'; s_test_hsgl
+%  'See'; exp_hsgl
 %
 % Copyright(c) 2009-2011 Ryota Tomioka
 %              2009      Stefan Haufe
