@@ -11,7 +11,7 @@ if all(info.blks==info.blks(1))
   vv=reshape(vv,[bsz,n/bsz]);
   ss0=sqrt(sum(vv.^2));
   ss=max(ss0-lambda,0);
-  J=ss0>0;
+  J=ss>0;
   vv(:,~J)=0;
   vv(:,J)=bsxfun(@mtimes, vv(:,J), ss(J)./ss0(J));
   vv=vv(:);
